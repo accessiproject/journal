@@ -3,5 +3,11 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<a href="{{ path('category_edit', {'id': 0})}}">Gestion des catégories</a>
+    <nav role="navigation" aria-label="Menu secondaire">
+        <ul>
+            <li>
+                <a href="{{ path('category_index') }}">Gestion des catégories</a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}

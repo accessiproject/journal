@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Édition{% endblock %}
+{% block title %}
+    {{ id ? 'Modification de la catégorie' : 'Création d\'une nouvelle catégorie' }}
+{% endblock %}
 
 {% block body %}
     {{ form(formCategory) }}
