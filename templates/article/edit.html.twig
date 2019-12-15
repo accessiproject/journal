@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ id ? 'Modification de l\'article' : 'Création de l\'article' }}
+{% endblock %}
+
+{% block body %}
+    {{ form(formArticle) }}
+{% endblock %}
