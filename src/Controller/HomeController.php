@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Category;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -14,8 +15,10 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'categories' => $categories,
         ]);
     }
 

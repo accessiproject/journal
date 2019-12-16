@@ -3,5 +3,21 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<h1>Étape 1</h2>
+    <h2>Par thème</h2>
+    <ol>
+        {% for category in categories %}
+            <li>
+                <a href="{{ path('category_article', {'id': category.id})}}">
+                    {{ category.title }}
+                    {% if category.articles|length > 1 %}
+                        ({{ category.articles|length }} articles publiés)
+                    {% elseif category.articles|length == 1 %}
+                        ({{ category.articles|length }} article publié)
+                    {% else %}
+                        (Aucun article publié)
+                    {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ol>
 {% endblock %}

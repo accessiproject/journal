@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -60,4 +61,18 @@ class CategoryController extends AbstractController
             'id' => $category->getId(),
         ]);
     }
+
+    /**
+     * @Route("/theme/list/article/{category}", name="category_article")
+     */
+    public function article($category)
+    {
+        $articles = $this->getDoctrine()->getRepository(Article::class)->findByCategory($$category);
+        return $this->render('category/article.html.twig', [
+            'controller_name' => 'CategoryController',
+            'articles' => $articles,
+            'id' => $category->getId(),
+        ]);
+    }
+
 }
