@@ -21,7 +21,7 @@ class CategoryType extends AbstractType
             ->add('description', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('save', SubmitType::class);
+            ->add('save', submitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
