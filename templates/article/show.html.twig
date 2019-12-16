@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Article n°{{ article.id }}: {{ article.title }}
+{% endblock %}
+
+{% block body %}
+        <h1>Article n°{{ article.id }}: {{ article.title }}</h1>
+        <p>Catégorie : {{ article.category.title }}</p>
+        <div id="divshow_articlesummary">
+            <h2>Résumé :</h2>
+            {{ article.summary }}
+        </div>
+        <div id="divshow_articlecontent">
+            <h2>Contenu :</h2>
+            {{ article.content }}
+        </div>
+        <div id="divshow_articleinfo">
+            <h2>Informations générales :</h2>
+            <ul>
+                <li>Créé le {{ article.createdat|date("d/m/y") }} à {{ article.createdat|date("H:i") }}</li>
+                <li>Dernière modification le {{ article.updatedat|date("d/m/y") }} à {{ article.updatedat|date("H:i") }}</li>
+                <li>Rédigé par {{ article.user.firstname }} (<a href="mailto:{{ article.user.email }}">{{ article.user.email }}</a>)</li>
+            </ul>
+        </div>
+        <div id="divshow.articlecommentaire">
+            <h2>Commentaire(s) :</h2>
+            {% if article.comments|length %}
+                <p>Nombre de commentaire(s) publié(s) : {{ article.comments|length }}.</p>
+            {% else %}
+                <p>Aucun commentaire publié.</p>
+            {% endif %}
+            <ol>
+                {% for comment in comments %}
+                <li>{{ comment.comment }} (posté le {{ comment.createdat|date("d/m/Y") }} à {{ comment.createdat|date("h:i") }} par {{ comment.user.firstname }} (<a href="mailto:{{ comment.user.email }}">{{ comment.user.email }}</a>)</li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div id="divshow_articlebutton">
+            <hr>
+            <p>
+                <a href="{{ path('article_edit', {'id': article.id}) }}">Modifier cette article</a>
+                <a href="{{ path('article_delete', {'id': article.id}) }}">Supprimer cette article</a>
+            </p>
+        </div>
+{% endblock %}

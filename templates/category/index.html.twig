@@ -13,6 +13,7 @@
                 <th>Id</th>
                 <th>Titre</th>
                 <th>Description</th>
+                <th>Nombre de catégories</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
@@ -23,6 +24,7 @@
                 <td>{{ category.id }}</td>
                 <td>{{ category.title }}</td>
                 <td>{{ category.description }}</td>
+                <td>{{ category.articles|length }}</td>
                 <td>
                     <a href="{{ path('category_edit', {'id': category.id}) }}">Modifier</a>
                 </td>

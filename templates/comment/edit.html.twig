@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ id ? 'Modification du commentaire' : 'Création du commentaire' }}
+{% endblock %}
+
+{% block body %}
+    {{ form(formComment) }}
+{% endblock %}

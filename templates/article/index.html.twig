@@ -16,6 +16,8 @@
                 <th>Résumé</th>
                 <th>Utilisateur</th>
                 <th>Date de création</th>
+                <th>Nombre de commentaires</th>
+                <th>Afficher</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
@@ -29,6 +31,10 @@
                 <td>{{ article.summary }}</td>
                 <td>{{ article.user.email }}</td>
                 <td>{{ article.createdat|date("m/d/Y H:i") }}</td>
+                <td>{{ article.comments|length }}</td>
+                <td>
+                    <a href="{{ path('article_show', {'id': article.id}) }}">Afficher</a>
+                </td>
                 <td>
                     <a href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a>
                 </td>

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,6 +52,21 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * @Route("/article/show/{id}", name="article_show")
+     */
+    public function show($id)
+    {
+        $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+        $comments = $this->getDoctrine()->getRepository(Comment::class)->findByArticle($article);
+        return $this->render('article/show.html.twig', [
+            'controller_name' => 'ArticleController',
+            'article' => $article,
+            'comments' => $comments,
+            'id' => $article->getId(),
+        ]);
+    }
+
+    /**
      * @Route("/article/delete/{id}", name="article_delete")
      */
     public function delete($id)
@@ -63,4 +79,6 @@ class ArticleController extends AbstractController
             'id' => $article->getId(),
         ]);
     }
+
+    
 }

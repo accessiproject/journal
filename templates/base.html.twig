@@ -12,8 +12,21 @@
             <a href="{{ path('app_register') }}">Inscription</a>
         {% else %}
             <a href="{{ path('app_logout') }}">Déconnexion</a>
+            <nav role="navigation" aria-label="Menu secondaire">
+                <ul>
+                    <li>
+                        <a href="{{ path('article_index') }}">Gestion des articles</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('comment_index') }}">Gestion des commentaires</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('category_index') }}">Gestion des catégories</a>
+                    </li>
+                </ul>
+            </nav>
         {% endif %}
-        </nav>
+    </nav>
         {% block body %}
         {% endblock %}
         {% block javascripts %}{% endblock %}
