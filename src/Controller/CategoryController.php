@@ -63,15 +63,14 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/theme/list/article/{category}", name="category_article")
+     * @Route("/theme/list/article/{id}", name="category_article")
      */
-    public function article($category)
+    public function article($id)
     {
-        $articles = $this->getDoctrine()->getRepository(Article::class)->findByCategory($$category);
+        $articles = $this->getDoctrine()->getRepository(Article::class)->findByCategory($id);
         return $this->render('category/article.html.twig', [
             'controller_name' => 'CategoryController',
             'articles' => $articles,
-            'id' => $category->getId(),
         ]);
     }
 

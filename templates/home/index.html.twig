@@ -7,7 +7,7 @@
     <ol>
         {% for category in categories %}
             <li>
-                <a href="{{ path('category_article', {'id': category.id})}}">
+                <a href="{{ path('category_article', {'id': category.id}) }}">
                     {{ category.title }}
                     {% if category.articles|length > 1 %}
                         ({{ category.articles|length }} articles publiés)
