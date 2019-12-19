@@ -3,17 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Entity\Image;
-use App\Service\FileUploader;
 use App\Form\ArticleType;
-use App\Form\ImageType;
 use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 
 class ArticleController extends AbstractController
 {
@@ -80,30 +76,6 @@ class ArticleController extends AbstractController
         $manager->flush();
         return $this->redirectToRoute('article_index', [
             'id' => $article->getId(),
-        ]);
-    }
-
-    /**
-     * @Route("/upload", name="article_upload")
-     */
-    public function upload(Request $request, FileUploader $fileUploader, EntityManagerInterface $manager)
-    {
-        $image = new Image();
-        $form = $this->createForm(ImageType::class, $image);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $imageFile */
-            $imageFile = $form['imageFilename']->getData();
-            if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
-                $image->setImageFilename($imageFileName);
-                $manager->persist($image);
-                $manager->flush();
-                return $this->redirectToRoute('article_upload');
-            }
-        }
-        return $this->render('article/new.html.twig', [
-            'form' => $form->createView(),
         ]);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Category;
-use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +20,7 @@ class CategoryType extends AbstractType
             ->add('title', TextType::class, [
                 'required' => false,
             ])
-            ->add('image', ImageType::class, [
+            ->add('image', FileType::class, [
                 'label' => 'Importez une image (facultatif)',
                 'mapped' => false,
                 'required' => false,

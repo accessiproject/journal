@@ -37,7 +37,7 @@ class Category
     private $articles;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Image", mappedBy="category", cascade={"persist", "remove"})
+     * @ORM\Column(type="string", length=255)
      */
     private $image;
 
@@ -106,20 +106,14 @@ class Category
         return $this;
     }
 
-    public function getImage(): ?Image
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage(?Image $image): self
+    public function setImage(string $image): self
     {
         $this->image = $image;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newCategory = null === $image ? null : $this;
-        if ($image->getCategory() !== $newCategory) {
-            $image->setCategory($newCategory);
-        }
 
         return $this;
     }
