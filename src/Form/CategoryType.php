@@ -3,12 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class CategoryType extends AbstractType
 {
@@ -16,6 +19,11 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'required' => false,
+            ])
+            ->add('image', ImageType::class, [
+                'label' => 'Importez une image (facultatif)',
+                'mapped' => false,
                 'required' => false,
             ])
             ->add('description', TextareaType::class, [

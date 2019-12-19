@@ -3,6 +3,7 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
+    <p><a href="{{ path('article_upload') }}">Image</a></p>
     <h2>Par thème</h2>
     <ol>
         {% for category in categories %}
