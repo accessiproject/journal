@@ -10,18 +10,34 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Omines\DataTablesBundle\Adapter\ArrayAdapter;
+use Omines\DataTablesBundle\Column\TextColumn;
+use Omines\DataTablesBundle\DataTableFactory;
 
 class ArticleController extends AbstractController
 {
     /**
      * @Route("/article/list", name="article_index")
      */
-    public function index()
+    public function index(Request $request, DataTableFactory $dataTableFactory)
     {
         $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
+        $table = $dataTableFactory->create()
+            ->add('firstName', TextColumn::class)
+            ->add('lastName', TextColumn::class)
+            ->createAdapter(ArrayAdapter::class, [
+                ['firstName' => 'Donald', 'lastName' => 'Trump'],
+                ['firstName' => 'Barack', 'lastName' => 'Obama'],
+            ])
+            ->handleRequest($request);
+
+        if ($table->isCallback()) {
+            return $table->getResponse();
+        }
         return $this->render('article/index.html.twig', [
             'controller_name' => 'ArticleController',
             'articles' => $articles,
+            'datatable' => $table
         ]);
     }
 

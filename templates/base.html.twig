@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
+        {% endblock %}
     </head>
     <body>
     <nav role="navigation" aria-label="Menu principal">
@@ -29,6 +31,14 @@
     </nav>
         {% block body %}
         {% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+            <script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+            <script>
+            $(function() {
+                $('#presidents').initDataTables({{ datatable_settings(datatable) }});
+            });
+            </script>
+        {% endblock %}
     </body>
 </html>
